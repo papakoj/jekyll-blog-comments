@@ -59,9 +59,11 @@ namespace JekyllBlogCommentsAzure
             var github = new GitHubClient(new ProductHeaderValue("PostCommentToPullRequest"),
                 new Octokit.Internal.InMemoryCredentialStore(new Credentials(ConfigurationManager.AppSettings["GitHubToken"])));
 
+
             // Get a reference to our GitHub repository
             var repoOwnerName = ConfigurationManager.AppSettings["PullRequestRepository"].Split('/');
             var repo = await github.Repository.Get(repoOwnerName[0], repoOwnerName[1]);
+            Console.WriteLine(repoOwnerName[0] + " is me!");
 
             // Create a new branch from the default branch
             var defaultBranch = await github.Repository.Branch.Get(repo.Id, repo.DefaultBranch);
